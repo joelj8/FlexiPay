@@ -1,0 +1,90 @@
+﻿@model FlexiPay.Models.ViewModel.UIFactura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UIFactura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServicioID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServicioID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaLimite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaLimite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AprobacionNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AprobacionNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TarjetaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TarjetaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inactivo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

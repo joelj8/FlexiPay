@@ -1,0 +1,42 @@
+﻿@model FlexiPay.Models.ViewModel.UIServicio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UIServicio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

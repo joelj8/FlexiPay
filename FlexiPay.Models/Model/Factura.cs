@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FlexiPay.Models.Model
+{
+    public class Factura
+    {
+        [Key]
+        public int ID { get; set; }
+
+        [ForeignKey("Servicio")]
+        public int ServicioID { get; set; }
+        public Servicio Servicio { get; set; }
+        public decimal Monto { get; set; }
+        public decimal Pagado { get; set; }
+        
+        [DisplayName("Fecha Limite")]
+        public DateTime FechaLimite { get; set; }
+
+        [DisplayName("Fecha de Pago")]
+        public DateTime FechaPago { get; set; }
+
+        [Column("Aprobacion", TypeName = "varchar")]
+        [DisplayName("Numero Aprobación")]
+        [MaxLength(20)]
+        public string AprobacionNumero { get; set; }
+
+        [ForeignKey("Tarjeta")]
+        public int TarjetaID { get; set; }
+        public Tarjeta Tarjeta { get; set; }
+
+        [Column("Coment", TypeName = "ntext")]
+        [DisplayName("Comentario")]
+        public string Comentario { get; set; }
+        public bool Inactivo { get; set; }
+
+
+
+        
+
+
+    }
+}
