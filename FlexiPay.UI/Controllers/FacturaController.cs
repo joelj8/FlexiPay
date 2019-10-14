@@ -30,8 +30,10 @@ namespace FlexiPay.UI.Controllers
             return View(facturas);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            await LoadDataWork();
+
             UIFactura factura = new UIFactura();
             return View(factura);
         }
@@ -46,7 +48,8 @@ namespace FlexiPay.UI.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-             await FindFactura(id);
+            await LoadDataWork();
+            await FindFactura(id);
             return View(facturaMng);
 
         }
@@ -70,6 +73,7 @@ namespace FlexiPay.UI.Controllers
             return View(facturaMng);
         }
 
+        [HttpPost]
         public async Task<ActionResult> Delete(UIFactura facturadel)
         {
             await DeleteFactura(facturadel);
@@ -99,21 +103,37 @@ namespace FlexiPay.UI.Controllers
 
         private async Task GetListFacturas()
         {
-            HttpResponseMessage response = serviceObj.GetResponse("api/Factura/getFacturas");
-
-            response.EnsureSuccessStatusCode();
-            string result = await response.Content.ReadAsStringAsync();
+            string result = await callResponse("api/Factura/getFacturas");
             facturas = JsonConvert.DeserializeObject<List<UIFactura>>(result);
         }
 
         private async Task FindFactura(int id)
         {
-            HttpResponseMessage response = serviceObj.GetResponse("api/Factura/getFactura/"+id.ToString());
-
-            response.EnsureSuccessStatusCode();
-            string result = await response.Content.ReadAsStringAsync();
+            string result = await callResponse("api/Factura/getFactura/" + id.ToString());
             facturaMng = JsonConvert.DeserializeObject<UIFactura>(result);
         }
 
+        private async Task LoadDataWork()
+        {
+            // Tarjetas
+            string result = await callResponse("api/Tarjeta/getTarjetas");
+            List<UITarjeta> tarjetasMng = JsonConvert.DeserializeObject<List<UITarjeta>>(result);
+            
+            ViewBag.TarjetaList = tarjetasMng.Select(i => new SelectListItem { Value = i.ID.ToString(), Text = i.TarjetaNumero});
+
+            // Servicios
+            string resultserv = await callResponse("api/Servicio/getServicios");
+            List<UIServicio> serviciosMng = JsonConvert.DeserializeObject<List<UIServicio>>(resultserv);
+
+            ViewBag.ServicioList = serviciosMng.Select(i => new SelectListItem { Value = i.ID.ToString(), Text = i.Servicio });
+        }
+
+        private async Task<string> callResponse(string url)
+        {
+            HttpResponseMessage response = serviceObj.GetResponse(url);
+            response.EnsureSuccessStatusCode();
+            string result = await response.Content.ReadAsStringAsync();
+            return result;
+        }
     }
 }

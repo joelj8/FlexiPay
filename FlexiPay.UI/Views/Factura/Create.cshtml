@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>UIFactura</h4>
         <hr />
@@ -18,7 +18,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ServicioID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ServicioID, new { htmlAttributes = new { @class = "form-control" } })
+                @* @Html.EditorFor(model => model.ServicioID, new { htmlAttributes = new { @class = "form-control" } }) *@
+                @Html.DropDownListFor(model => model.ServicioID, new SelectList(ViewBag.ServicioList, "Value", "Text"), "- Please Select -", htmlAttributes: new { @class = "form-control jsbasicdropdown" })
                 @Html.ValidationMessageFor(model => model.ServicioID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,7 +67,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TarjetaID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TarjetaID, new { htmlAttributes = new { @class = "form-control" } })
+                @*  @Html.EditorFor(model => model.TarjetaID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("TarjtID", new SelectList(ViewBag.TarjetaList), new { htmlAttributes = new { @class = "form-control" } })
+                *@
+
+                @Html.DropDownListFor(model => model.TarjetaID, new SelectList(ViewBag.TarjetaList, "Value", "Text"), "- Please Select -", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TarjetaID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -79,16 +84,17 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Inactivo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Inactivo)
-                    @Html.ValidationMessageFor(model => model.Inactivo, "", new { @class = "text-danger" })
+        @*
+            <div class="form-group">
+                @Html.LabelFor(model => model.Inactivo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Inactivo)
+                        @Html.ValidationMessageFor(model => model.Inactivo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-
+        *@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -103,4 +109,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+
 }

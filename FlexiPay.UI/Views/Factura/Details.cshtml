@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ServicioID)
+            @Html.DisplayFor(model => model.Servicio.Servicio)
         </dd>
 
         <dt>
@@ -63,7 +63,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TarjetaID)
+            @Html.DisplayFor(model => model.Tarjeta.TarjetaNumero)
         </dd>
 
         <dt>
@@ -72,14 +72,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Comentario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Inactivo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Inactivo)
         </dd>
 
     </dl>

@@ -21,9 +21,13 @@ namespace FlexiPay.Models.Model
         public decimal Pagado { get; set; }
         
         [DisplayName("Fecha Limite")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaLimite { get; set; }
 
         [DisplayName("Fecha de Pago")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaPago { get; set; }
 
         [Column("Aprobacion", TypeName = "varchar")]
