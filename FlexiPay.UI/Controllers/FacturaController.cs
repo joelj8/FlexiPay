@@ -26,8 +26,15 @@ namespace FlexiPay.UI.Controllers
         public async Task<ActionResult> Index()
         {
             await GetListFacturas();
+            var facturasPendientes = facturas.Where(x => x.Pagado == 0).OrderByDescending(x => x.FechaLimite).ToList();
+            return View(facturasPendientes);
+        }
 
-            return View(facturas);
+        public async Task<ActionResult> Historico()
+        {
+            await GetListFacturas();
+            var facturasHistorico = facturas.OrderByDescending(x => x.FechaLimite).ToList();
+            return View(facturasHistorico);
         }
 
         public async Task<ActionResult> Create()
@@ -49,6 +56,9 @@ namespace FlexiPay.UI.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
+            
+            HttpContext.Session["culture"] = "en-GB";
+
             await LoadDataWork();
             await FindFactura(id);
             if (facturaMng.Pagado != 0 || facturaMng.Inactivo)
@@ -75,6 +85,14 @@ namespace FlexiPay.UI.Controllers
             }
             return View(facturaMng);
         }
+      
+        [HttpPost]
+        public async Task<ActionResult> Pagado(UIFactura facturaupd)
+        {
+            await UpdateFactura(facturaupd);
+            return RedirectToAction("index", "factura");
+        }
+        
         public async Task<ActionResult> Details(int id)
         {
             await FindFactura(id);

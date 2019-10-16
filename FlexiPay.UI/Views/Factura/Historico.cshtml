@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FlexiPay.Models.ViewModel.UIFactura>
+
+@{
+    ViewBag.Title = "Historico de Facturas";
+}
+
+    <h2>Historico de Facturas</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServicioID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaLimite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaPago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AprobacionNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TarjetaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicio.Servicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pagado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaLimite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaPago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AprobacionNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarjeta.TarjetaNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) 
+        </td>
+    </tr>
+}
+
+</table>

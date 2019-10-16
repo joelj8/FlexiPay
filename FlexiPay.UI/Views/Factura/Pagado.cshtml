@@ -16,6 +16,9 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.FechaLimiteText)
+    @Html.HiddenFor(model => model.MontoText)
+    @Html.HiddenFor(model => model.ServicioID)
 
     <div class="form-group">
         @Html.LabelFor(model => model.ServicioID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,7 +44,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.FechaPago, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.FechaPago, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.FechaPagoText, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
             @Html.ValidationMessageFor(model => model.FechaPago, "", new { @class = "text-danger" })
         </div>
     </div>
