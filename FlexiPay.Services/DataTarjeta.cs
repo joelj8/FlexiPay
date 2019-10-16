@@ -9,24 +9,28 @@ using System.Threading.Tasks;
 namespace FlexiPay.Services
 {
     
-    public static class DataTarjeta
+    public  class DataTarjeta
     {
-        private static readonly DBFlexiPayContext dbcontext = new DBFlexiPayContext();
+        private readonly DBFlexiPayContext dbcontext;
 
+        public DataTarjeta()
+        {
+            dbcontext = new DBFlexiPayContext();
+        }
 
-        public static List<Tarjeta> GetTarjetas()
+        public List<Tarjeta> GetTarjetas()
         {
             var result = dbcontext.Tarjetas.Where(x => !x.Inactivo).ToList();
             return result;
         }
 
-        public static Tarjeta GetTarjeta(int id)
+        public Tarjeta GetTarjeta(int id)
         {
             var result = dbcontext.Tarjetas.FirstOrDefault(x => !x.Inactivo && x.TarjetaID == id);
             return result;
         }
 
-        public static bool InsertTarjeta(Tarjeta tarjetanew)
+        public bool InsertTarjeta(Tarjeta tarjetanew)
         {
             bool result = false;
             try
@@ -43,7 +47,7 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool UpdateTarjeta(Tarjeta tarjetaupd)
+        public bool UpdateTarjeta(Tarjeta tarjetaupd)
         {
             bool result = false;
             try
@@ -65,7 +69,7 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool DeleteTarjeta(int id)
+        public bool DeleteTarjeta(int id)
         {
             bool result = false;
             try

@@ -8,24 +8,29 @@ using System.Threading.Tasks;
 
 namespace FlexiPay.Services
 {
-    public static class DataServicio
+    public class DataServicio
     {
-        private static readonly DBFlexiPayContext dbcontext = new DBFlexiPayContext();
+        private readonly DBFlexiPayContext dbcontext;
 
-        public static List<Servicio> GetServicios()
+        public DataServicio()
+        {
+            dbcontext = new DBFlexiPayContext();
+        }
+
+        public List<Servicio> GetServicios()
         {
             var result = dbcontext.Servicios.Where(x=> !x.Inactivo).ToList();
             return result;
         }
 
-        public static Servicio GetServicio(int id)
+        public Servicio GetServicio(int id)
         {
             /*return dbcontext.Servicios.Where(x => x.ServicioID == id && !x.Inactivo ).FirstOrDefault();*/
             return dbcontext.Servicios.FirstOrDefault(x => x.ServicioID == id && !x.Inactivo);
             
         }
 
-        public static bool InsertServicio(Servicio servicioadd)
+        public bool InsertServicio(Servicio servicioadd)
         {
             bool result;
             try
@@ -42,7 +47,7 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool UpdateServicio(Servicio servicioupd)
+        public bool UpdateServicio(Servicio servicioupd)
         {
             bool result = false;
             try
@@ -69,7 +74,7 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool DeleteServicio(int id)
+        public bool DeleteServicio(int id)
         {
             bool result;
             try

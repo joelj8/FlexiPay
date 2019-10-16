@@ -16,9 +16,11 @@ namespace FlexiPay.WebApi.Controllers
     public class TarjetaController : ApiController
     {
         private readonly AutoMapper.MapperConfiguration objMap;
+        private readonly DataTarjeta dataservTarjeta;
 
         public TarjetaController()
         {
+            dataservTarjeta = new DataTarjeta();
             List<Profile> profilelist = new List<Profile>();
             profilelist.Add(new TarjetaProfile());
             profilelist.Add(new MTarjetaProfile());
@@ -29,7 +31,7 @@ namespace FlexiPay.WebApi.Controllers
 
         public JsonResult<List<ApiTarjeta>> GetTarjetas()
         {
-            List<Tarjeta> tarjetaLista = DataTarjeta.GetTarjetas();
+            List<Tarjeta> tarjetaLista = dataservTarjeta.GetTarjetas();
             
             List<ApiTarjeta> tarjetas = objMap.CreateMapper().Map<List<ApiTarjeta>>(tarjetaLista);
 
@@ -39,7 +41,7 @@ namespace FlexiPay.WebApi.Controllers
         public JsonResult<ApiTarjeta> GetTarjeta(int id)
         {
 
-            Tarjeta tarjetaLista = DataTarjeta.GetTarjeta(id);
+            Tarjeta tarjetaLista = dataservTarjeta.GetTarjeta(id);
             ApiTarjeta tarjetas = objMap.CreateMapper().Map<ApiTarjeta>(tarjetaLista);
             
             return Json<ApiTarjeta>(tarjetas);
@@ -53,7 +55,7 @@ namespace FlexiPay.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 Tarjeta tarjetaInsert = objMap.CreateMapper().Map<Tarjeta>(tarjeta);
-                resultinsert = DataTarjeta.InsertTarjeta(tarjetaInsert);
+                resultinsert = dataservTarjeta.InsertTarjeta(tarjetaInsert);
             }
             return Json<bool>(resultinsert);
         }
@@ -65,7 +67,7 @@ namespace FlexiPay.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 Tarjeta tarjetaUpdate = objMap.CreateMapper().Map<Tarjeta>(tarjeta);
-                resultinsert = DataTarjeta.UpdateTarjeta(tarjetaUpdate);
+                resultinsert = dataservTarjeta.UpdateTarjeta(tarjetaUpdate);
             }
             return Json<bool>(resultinsert);
         }
@@ -74,10 +76,10 @@ namespace FlexiPay.WebApi.Controllers
         public JsonResult<bool> DeleteTarjeta(int id)
         {
             bool result = false;
-            Tarjeta tarjetaDelete = DataTarjeta.GetTarjeta(id);
+            Tarjeta tarjetaDelete = dataservTarjeta.GetTarjeta(id);
             if (tarjetaDelete != null)
             {
-                result = DataTarjeta.DeleteTarjeta(id);
+                result = dataservTarjeta.DeleteTarjeta(id);
             }
 
             return Json<bool>(result);

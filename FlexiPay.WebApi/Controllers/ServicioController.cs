@@ -16,9 +16,12 @@ namespace FlexiPay.WebApi.Controllers
     public class ServicioController : ApiController
     {
         private readonly AutoMapper.MapperConfiguration objMap;
+        private readonly DataServicio dataservServicio;
 
         public ServicioController()
         {
+            dataservServicio = new DataServicio();
+
             List<Profile> profilelist = new List<Profile>();
             profilelist.Add(new ServicioProfile());
             profilelist.Add(new TarjetaProfile());
@@ -29,7 +32,7 @@ namespace FlexiPay.WebApi.Controllers
         public JsonResult<List<ApiServicio>> GetServicios()
         {
 
-            List<Servicio> servicioLista = DataServicio.GetServicios();
+            List<Servicio> servicioLista = dataservServicio.GetServicios();
             //AutoMapper.MapperConfiguration objMap = new AutoMapper.MapperConfiguration(i => i.AddProfile(new ServicioProfile()));
             List<ApiServicio> servicios = objMap.CreateMapper().Map<List<ApiServicio>>(servicioLista);
 
@@ -38,7 +41,7 @@ namespace FlexiPay.WebApi.Controllers
 
         public JsonResult<ApiServicio> GetServicio(int id)
         {
-            Servicio servicioLista = DataServicio.GetServicio(id);
+            Servicio servicioLista = dataservServicio.GetServicio(id);
             ApiServicio servicios = objMap.CreateMapper().Map<ApiServicio>(servicioLista);
 
             return Json<ApiServicio>(servicios);
@@ -51,7 +54,7 @@ namespace FlexiPay.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 Servicio servicioInsert = objMap.CreateMapper().Map<Servicio>(servicio);
-                resultinsert = DataServicio.InsertServicio(servicioInsert);
+                resultinsert = dataservServicio.InsertServicio(servicioInsert);
             }
             return Json<bool>(resultinsert);
         }
@@ -63,7 +66,7 @@ namespace FlexiPay.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 Servicio servicioUpdate = objMap.CreateMapper().Map<Servicio>(servicio);
-                result = DataServicio.UpdateServicio(servicioUpdate);
+                result = dataservServicio.UpdateServicio(servicioUpdate);
             }
             return Json<bool>(result);
         }
@@ -72,10 +75,10 @@ namespace FlexiPay.WebApi.Controllers
         public JsonResult<bool> DeleteServicio(int id)
         {
             bool result = false;
-            Servicio servicioDelete = DataServicio.GetServicio(id);
+            Servicio servicioDelete = dataservServicio.GetServicio(id);
             if (servicioDelete != null)
             {
-                result = DataServicio.DeleteServicio(id);
+                result = dataservServicio.DeleteServicio(id);
             }
 
             return Json<bool>(result);
