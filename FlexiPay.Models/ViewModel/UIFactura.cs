@@ -23,13 +23,15 @@ namespace FlexiPay.Models.ViewModel
         public decimal Monto { get; set; }
 
         [DisplayName("Monto")]
+        [Required(ErrorMessage = "Please add the amount")]
         public string MontoText { get; set; } = "0.00";
 
         [DisplayFormat(DataFormatString = "{0:#,###0.00}", ApplyFormatInEditMode = true)]
-
         public decimal Pagado { get; set; }
 
         [DisplayName("Pagado")]
+        [Required(ErrorMessage = "Please add the payment")]
+        
         public string PagadoText { get; set; } = "0.00";
 
         [DisplayName("Fecha Limite")]
@@ -38,6 +40,7 @@ namespace FlexiPay.Models.ViewModel
         public DateTime FechaLimite { get; set; }
 
         [DisplayName("Fecha Limite")]
+        [Required(ErrorMessage = "Please add the invoice date")]
         public string FechaLimiteText { get; set; }
 
         [DisplayName("Fecha Pago")]
@@ -46,6 +49,7 @@ namespace FlexiPay.Models.ViewModel
         public DateTime? FechaPago { get; set; }
 
         [DisplayName("Fecha Pago")]
+        [Required(ErrorMessage = "Please add the payment date")]
         public string FechaPagoText { get; set; }
 
         [DisplayName("Aprobación Número")]
@@ -56,7 +60,6 @@ namespace FlexiPay.Models.ViewModel
         public UITarjeta Tarjeta { get; set; }
         public string Comentario { get; set; }
         public bool Inactivo { get; set; }
-
         public void setValueToText()
         {
             this.MontoText = this.Monto.ToString();
@@ -65,7 +68,6 @@ namespace FlexiPay.Models.ViewModel
             this.FechaPagoText = this.FechaPago == null ? "" : this.FechaPago.Value.ToString("dd'/'MM'/'yyyy");
 
         }
-
         public void setTextToValue()
         {
             decimal.TryParse(this.MontoText.Replace(",", ""), out _montoDecimal);

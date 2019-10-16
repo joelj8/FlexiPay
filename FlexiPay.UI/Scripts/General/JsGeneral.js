@@ -15,7 +15,8 @@
             showAnim: 'clip',
             highlightWeek: true
         });
-        //$(".datepicker").datepicker("option", "dateFormat", "dd/mm/yy");
-        //$(".datepicker").datepicker("option", "showAnim", "clip");
+
+        $('.dttable').DataTable();
+
 
     });

@@ -45,7 +45,7 @@
         @Html.LabelFor(model => model.FechaPago, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.FechaPagoText, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
-            @Html.ValidationMessageFor(model => model.FechaPago, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.FechaPagoText, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -53,7 +53,7 @@
         @Html.LabelFor(model => model.Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.PagadoText, new { htmlAttributes = new { @class = "form-control numberformat" } })
-            @Html.ValidationMessageFor(model => model.Pagado, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.PagadoText , "", new { @class = "text-danger" })
         </div>
     </div>
 

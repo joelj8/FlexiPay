@@ -31,7 +31,7 @@
         @Html.LabelFor(model => model.Monto, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.MontoText, new { @class = "form-control numberformat" })
-            @Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.MontoText , "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -39,7 +39,7 @@
         @Html.LabelFor(model => model.FechaLimite, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.FechaLimiteText, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
-            @Html.ValidationMessageFor(model => model.FechaLimite, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.FechaLimiteText , "", new { @class = "text-danger" })
         </div>
     </div>
 

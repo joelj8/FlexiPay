@@ -9,78 +9,81 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ServicioID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Monto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pagado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaLimite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AprobacionNumero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TarjetaID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comentario)
-        </th>
+<table class="table table-striped table-bordered dttable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ServicioID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaLimite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AprobacionNumero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TarjetaID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentario)
+            </th>
 
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicio.Servicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Monto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pagado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaLimite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AprobacionNumero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tarjeta.TarjetaNumero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comentario)
+                </td>
+                <td>
+                    @if (item.Pagado == 0)
+                    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Servicio.Servicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Monto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pagado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaLimite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaPago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AprobacionNumero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tarjeta.TarjetaNumero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comentario)
-        </td>
-        <td>
-            @if (item.Pagado == 0)
-            {
-                
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID });
-                @:|
-                @Html.ActionLink("Pay", "Pagado", new { id = item.ID });
-                @:|
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                @:|
-            }
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID });
+                        @:|
+                        @Html.ActionLink("Pay", "Pagado", new { id = item.ID });
+                        @:|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        @:|
+                    }
 
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
 
-        </td>
-    </tr>
-}
-
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
