@@ -7,13 +7,13 @@ namespace FlexiPay.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Mig20191008 : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Mig20191008));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910081920397_Mig20191008"; }
+            get { return "201910152139321_Initial"; }
         }
         
         string IMigrationMetadata.Source

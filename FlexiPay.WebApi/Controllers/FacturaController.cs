@@ -16,8 +16,11 @@ namespace FlexiPay.WebApi.Controllers
     public class FacturaController : ApiController
     {
         private readonly AutoMapper.MapperConfiguration objMap;
+        private readonly DataFactura dataservFactura;
         public FacturaController()
         {
+            dataservFactura = new DataFactura();
+
             List<Profile> profilelist = new List<Profile>();
             profilelist.Add(new FacturaProfile());
             profilelist.Add(new MFacturaProfile());
@@ -31,7 +34,8 @@ namespace FlexiPay.WebApi.Controllers
 
         public JsonResult<List<ApiFactura>> GetFacturas()
         {
-            List<Factura> facturaLista = DataFactura.GetFacturas();
+            List<Factura> facturaLista = dataservFactura.GetFacturas();
+                
 
             List<ApiFactura> facturas = objMap.CreateMapper().Map<List<ApiFactura>>(facturaLista);
 
@@ -40,7 +44,7 @@ namespace FlexiPay.WebApi.Controllers
 
         public JsonResult<ApiFactura> GetFactura(int id)
         {
-            Factura facturaLista = DataFactura.GetFactura(id);
+            Factura facturaLista = dataservFactura.GetFactura(id);
 
             ApiFactura facturas = objMap.CreateMapper().Map<ApiFactura>(facturaLista);
 
@@ -53,7 +57,7 @@ namespace FlexiPay.WebApi.Controllers
             bool resultinsert = false;
             
             Factura facturaInsert = objMap.CreateMapper().Map<Factura>(factura);
-            resultinsert = DataFactura.InsertFactura(facturaInsert);
+            resultinsert = dataservFactura.InsertFactura(facturaInsert);
 
             return resultinsert;
         }
@@ -64,7 +68,7 @@ namespace FlexiPay.WebApi.Controllers
             bool resultupdate = false;
 
             Factura facturaUpdate = objMap.CreateMapper().Map<Factura>(factura);
-            resultupdate = DataFactura.UpdateFactura(facturaUpdate);
+            resultupdate = dataservFactura.UpdateFactura(facturaUpdate);
 
             return resultupdate;
         }
@@ -74,10 +78,10 @@ namespace FlexiPay.WebApi.Controllers
         {
             bool resultDelete = false;
 
-            Factura facturaDelete = DataFactura.GetFactura(id);
+            Factura facturaDelete = dataservFactura.GetFactura(id);
             if (facturaDelete != null)
             {
-                resultDelete = DataFactura.DeleteFactura(id);
+                resultDelete = dataservFactura.DeleteFactura(id);
             }
 
 

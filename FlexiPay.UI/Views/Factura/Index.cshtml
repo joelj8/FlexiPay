@@ -66,9 +66,19 @@
             @Html.DisplayFor(modelItem => item.Comentario)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @if (item.Pagado == 0)
+            {
+                
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID });
+                @:|
+                @Html.ActionLink("Pay", "Pagado", new { id = item.ID });
+                @:|
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @:|
+            }
+
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+
         </td>
     </tr>
 }

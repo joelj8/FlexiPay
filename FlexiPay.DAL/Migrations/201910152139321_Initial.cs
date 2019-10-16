@@ -3,7 +3,7 @@ namespace FlexiPay.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Mig20191008 : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -14,17 +14,17 @@ namespace FlexiPay.DAL.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         ServicioID = c.Int(nullable: false),
                         Monto = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Pagado = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Pagado = c.Decimal(precision: 18, scale: 2),
                         FechaLimite = c.DateTime(nullable: false),
-                        FechaPago = c.DateTime(nullable: false),
-                        Aprobacion = c.String(maxLength: 20, unicode: false),
-                        TarjetaID = c.Int(nullable: false),
-                        Coment = c.String(storeType: "ntext"),
+                        FechaPago = c.DateTime(),
+                        Aprobacion = c.String(nullable: false, maxLength: 20, unicode: false),
+                        TarjetaID = c.Int(),
+                        Coment = c.String(nullable: false, storeType: "ntext"),
                         Inactivo = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Servicios", t => t.ServicioID, cascadeDelete: true)
-                .ForeignKey("dbo.Tarjetas", t => t.TarjetaID, cascadeDelete: true)
+                .ForeignKey("dbo.Tarjetas", t => t.TarjetaID)
                 .Index(t => t.ServicioID)
                 .Index(t => t.TarjetaID);
             
@@ -34,7 +34,7 @@ namespace FlexiPay.DAL.Migrations
                     {
                         ServicioID = c.Int(nullable: false, identity: true),
                         ServicioName = c.String(maxLength: 50, unicode: false),
-                        ServicioContacto = c.String(maxLength: 50, unicode: false),
+                        ServicioContrato = c.String(maxLength: 50, unicode: false),
                         ServicioTelefono = c.String(maxLength: 20, unicode: false),
                         Inactivo = c.Boolean(nullable: false),
                     })

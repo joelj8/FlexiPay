@@ -232,6 +232,7 @@
     <Content Include="Views\Factura\Edit.cshtml" />
     <Content Include="Views\Factura\Details.cshtml" />
     <Content Include="Views\Factura\Delete.cshtml" />
+    <Content Include="Views\Factura\Pagado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

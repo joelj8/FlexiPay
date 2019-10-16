@@ -35,14 +35,15 @@ namespace FlexiPay.UI.Controllers
             await LoadDataWork();
 
             UIFactura factura = new UIFactura();
+
             return View(factura);
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(UIFactura facturanew)
         {
+            
             await CreateFactura(facturanew);
-
             return RedirectToAction("index", "factura");
         }
 
@@ -50,8 +51,11 @@ namespace FlexiPay.UI.Controllers
         {
             await LoadDataWork();
             await FindFactura(id);
+            if (facturaMng.Pagado != 0 || facturaMng.Inactivo)
+            {
+                return RedirectToAction("index", "factura");
+            } 
             return View(facturaMng);
-
         }
 
         [HttpPost]
@@ -61,6 +65,16 @@ namespace FlexiPay.UI.Controllers
             return RedirectToAction("index", "factura");
         }
 
+        public async Task<ActionResult> Pagado(int id)
+        {
+            await LoadDataWork();
+            await FindFactura(id);
+            if (facturaMng.Pagado >= facturaMng.Monto || facturaMng.Inactivo)
+            {
+                return RedirectToAction("index", "factura");
+            }
+            return View(facturaMng);
+        }
         public async Task<ActionResult> Details(int id)
         {
             await FindFactura(id);
@@ -70,6 +84,10 @@ namespace FlexiPay.UI.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await FindFactura(id);
+            if (facturaMng.Pagado != 0 || facturaMng.Inactivo)
+            {
+                return RedirectToAction("index", "factura");
+            }
             return View(facturaMng);
         }
 
@@ -82,6 +100,7 @@ namespace FlexiPay.UI.Controllers
 
         private async Task CreateFactura(UIFactura facturanew)
         {
+            facturanew.setTextToValue();
             HttpResponseMessage response = serviceObj.PostResponse("api/Factura/InsertFactura",facturanew);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
@@ -89,6 +108,7 @@ namespace FlexiPay.UI.Controllers
 
         private async Task UpdateFactura(UIFactura facturaupd)
         {
+            facturaupd.setTextToValue();
             HttpResponseMessage response = serviceObj.PostResponse("api/Factura/UpdateFactura", facturaupd);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
@@ -96,7 +116,7 @@ namespace FlexiPay.UI.Controllers
 
         private async Task DeleteFactura(UIFactura facturadel)
         {
-            HttpResponseMessage response = serviceObj.DeleteResponse("api/Factura/UpdateFactura"+facturadel.ID.ToString());
+            HttpResponseMessage response = serviceObj.DeleteResponse("api/Factura/DeleteFactura/"+facturadel.ID.ToString());
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
         }
@@ -105,12 +125,14 @@ namespace FlexiPay.UI.Controllers
         {
             string result = await callResponse("api/Factura/getFacturas");
             facturas = JsonConvert.DeserializeObject<List<UIFactura>>(result);
+
         }
 
         private async Task FindFactura(int id)
         {
             string result = await callResponse("api/Factura/getFactura/" + id.ToString());
             facturaMng = JsonConvert.DeserializeObject<UIFactura>(result);
+            facturaMng.setValueToText();
         }
 
         private async Task LoadDataWork()

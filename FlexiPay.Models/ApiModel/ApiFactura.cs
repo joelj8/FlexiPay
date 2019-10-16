@@ -21,7 +21,7 @@ namespace FlexiPay.Models.ApiModel
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FechaPago { get; set; }
+        public DateTime? FechaPago { get; set; }
         public string AprobacionNumero { get; set; }
         public int TarjetaID { get; set; }
         public ApiTarjeta Tarjeta { get; set; }

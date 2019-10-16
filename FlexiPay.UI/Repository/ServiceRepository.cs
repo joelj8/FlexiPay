@@ -23,7 +23,8 @@ namespace FlexiPay.UI.Repository
             Client.BaseAddress = new Uri(ConfigurationManager.AppSettings["WebApiUrl"]);
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             //Client.GetAsync(("api/Servicio/Getservicio/1"));
-            
+            //http://localhost:65308/api/Factura/InsertFactura
+
         }
 
         public HttpResponseMessage GetResponse(string url)

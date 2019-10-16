@@ -51,13 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBFlexiPayContext.cs" />
-    <Compile Include="Migrations\201910081920397_Mig20191008.cs" />
-    <Compile Include="Migrations\201910081920397_Mig20191008.Designer.cs">
-      <DependentUpon>201910081920397_Mig20191008.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910082114311_mig002.cs" />
-    <Compile Include="Migrations\201910082114311_mig002.Designer.cs">
-      <DependentUpon>201910082114311_mig002.cs</DependentUpon>
+    <Compile Include="Migrations\201910152139321_Initial.cs" />
+    <Compile Include="Migrations\201910152139321_Initial.Designer.cs">
+      <DependentUpon>201910152139321_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,11 +69,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910081920397_Mig20191008.resx">
-      <DependentUpon>201910081920397_Mig20191008.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910082114311_mig002.resx">
-      <DependentUpon>201910082114311_mig002.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910152139321_Initial.resx">
+      <DependentUpon>201910152139321_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

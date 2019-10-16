@@ -15,33 +15,40 @@ namespace FlexiPay.Models.Model
         public int ID { get; set; }
 
         [ForeignKey("Servicio")]
+        [Required(ErrorMessage = "Please add a Service")]
         public int ServicioID { get; set; }
         public Servicio Servicio { get; set; }
+        
+        [Required(ErrorMessage = "Please add the amount")]
         public decimal Monto { get; set; }
-        public decimal Pagado { get; set; }
+
+        public decimal? Pagado { get; set; }
         
         [DisplayName("Fecha Limite")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage ="Please add the Date")]
         public DateTime FechaLimite { get; set; }
 
         [DisplayName("Fecha de Pago")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FechaPago { get; set; }
+        public DateTime? FechaPago { get; set; }
 
         [Column("Aprobacion", TypeName = "varchar")]
         [DisplayName("Numero Aprobación")]
         [MaxLength(20)]
-        public string AprobacionNumero { get; set; }
+        [Required(AllowEmptyStrings = true)]
+        public string AprobacionNumero { get; set; } = "";
 
         [ForeignKey("Tarjeta")]
-        public int TarjetaID { get; set; }
+        public int? TarjetaID { get; set; }
         public Tarjeta Tarjeta { get; set; }
 
         [Column("Coment", TypeName = "ntext")]
         [DisplayName("Comentario")]
-        public string Comentario { get; set; }
+        [Required(AllowEmptyStrings = true)]
+        public string Comentario { get; set; } = "";
         public bool Inactivo { get; set; }
 
 

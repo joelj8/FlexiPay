@@ -8,34 +8,39 @@ using System.Threading.Tasks;
 
 namespace FlexiPay.Services
 {
-    public static class DataFactura
+    public class DataFactura
     {
-        private static readonly DBFlexiPayContext dbcontext = new DBFlexiPayContext();
+        private readonly DBFlexiPayContext dbcontext;
 
-        public static List<Factura> GetFacturas()
+        public DataFactura()
+        {
+            dbcontext = new DBFlexiPayContext();
+        }
+
+        public List<Factura> GetFacturas()
         {
             //return dbcontext.Facturas.Where(x => !x.Inactivo).ToList();
-            
             return dbcontext.Facturas.Include("Servicio").Include("Tarjeta").Where(x => !x.Inactivo).ToList();
             
         }
 
-        public static Factura GetFactura(int id)
+        public Factura GetFactura(int id)
         {
-            return dbcontext.Facturas.FirstOrDefault(x => x.ID == id);
             //return dbcontext.Facturas.Include("Servicio").Include("Tarjeta").FirstOrDefault(x => x.ID == id);
+            return dbcontext.Facturas.Include("Servicio").Include("Tarjeta").FirstOrDefault(x => x.ID == id);
         }
 
-        public static bool InsertFactura(Factura facturanew)
+        public bool InsertFactura(Factura facturanew)
         {
             bool result=false;
             try
             {
+                facturanew.FechaPago = null;
                 dbcontext.Facturas.Add(facturanew);
                 dbcontext.SaveChanges();
                 result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 result = false;
@@ -44,15 +49,16 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool UpdateFactura(Factura facturaupd)
+        public bool UpdateFactura(Factura facturaupd)
         {
             bool result = false;
             try
             {
                 Factura facturaUpdate = GetFactura(facturaupd.ID);
-                facturaUpdate.Monto = facturaupd.Monto;
+                
                 facturaUpdate.FechaLimite = facturaupd.FechaLimite;
                 facturaUpdate.FechaPago = facturaupd.FechaPago;
+                facturaUpdate.Monto = facturaupd.Monto;
                 facturaUpdate.Pagado = facturaupd.Pagado;
                 facturaUpdate.ServicioID = facturaupd.ServicioID;
                 facturaUpdate.TarjetaID = facturaupd.TarjetaID;
@@ -72,7 +78,7 @@ namespace FlexiPay.Services
             return result;
         }
 
-        public static bool DeleteFactura(int id)
+        public bool DeleteFactura(int id)
         {
             bool result = false;
             try
