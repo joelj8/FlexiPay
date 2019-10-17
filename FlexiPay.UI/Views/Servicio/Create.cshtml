@@ -1,10 +1,10 @@
 ﻿@model FlexiPay.Models.ViewModel.UIServicio
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Servicio";
 }
 
-<h2>Create</h2>
+<h2>Crear Servicio</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UIServicio</h4>
+        <h4>Servicio</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -41,15 +41,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                @Html.ActionLink("Cancelar", "Index", new { controller = "Servicio" }, new { @class = "btn btn-warning" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

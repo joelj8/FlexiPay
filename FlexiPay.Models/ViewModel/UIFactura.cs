@@ -52,7 +52,8 @@ namespace FlexiPay.Models.ViewModel
         [Required(ErrorMessage = "Please add the payment date")]
         public string FechaPagoText { get; set; }
 
-        [DisplayName("Aprobación Número")]
+        [DisplayName("Número Aprobación")]
+        [StringLength(20, MinimumLength = 0, ErrorMessage = "Número Apobración 20 caracteres máximo")]
         public string AprobacionNumero { get; set; }
 
         [DisplayName("Tarjeta")]

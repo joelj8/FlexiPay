@@ -7,10 +7,10 @@
 <h2>Servicios</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Servicio", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 <table class="table table-striped table-bordered dttable">
-    <thead>
+    <thead class="bg-primary">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Servicio)
@@ -38,9 +38,21 @@
                     @Html.DisplayFor(modelItem => item.Telefono)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @*
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-xs btn-primary" }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-xs btn-danger" })
+                    *@
+
+                    <a href="@Url.Action("Edit", "Servicio", new { id = item.ID })" class="btn btn-xs btn-primary">
+                        <span class="glyphicon glyphicon-pencil"> Edita</span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Servicio", new { id = item.ID})" class="btn btn-xs btn-danger">
+                        <span class="glyphicon glyphicon-trash"> Borra</span>
+                    </a>
+                    <a href="@Url.Action("Details", "Servicio", new { id = item.ID})" class="btn btn-xs btn-success">
+                        <span class="glyphicon glyphicon-eye-open"> Ver</span>
+                    </a>
                 </td>
             </tr>
         }

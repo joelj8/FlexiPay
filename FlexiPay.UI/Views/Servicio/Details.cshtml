@@ -1,13 +1,13 @@
 ﻿@model FlexiPay.Models.ViewModel.UIServicio
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle Servicio";
 }
 
-<h2>Details</h2>
+<h2>Detalle Servicio</h2>
 
 <div>
-    <h4>UIServicio</h4>
+    <h4>Servicio</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,6 +37,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index", new { controller = "Servicio" }, new { @class = "btn btn-warning" })
 </p>
